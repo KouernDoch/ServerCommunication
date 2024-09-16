@@ -26,6 +26,7 @@ struct FirstView: View {
                     Text("Profile")
                 }
         }
+    
     }
 }
 

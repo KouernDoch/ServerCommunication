@@ -6,17 +6,10 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct HomeView: View {
-    var data : [PostInfor] = [
-    PostInfor(title: "Post", description: "Product testing", authorName: "Doch", date: "Thur 7:00 AM",Image: "ecomerceLogo"),
-    PostInfor(title: "Post", description: "Product testing", authorName: "Doch", date: "Thur 7:00 AM",Image: "ecomerceLogo"),
-    PostInfor(title: "Post", description: "Product testing", authorName: "Doch", date: "Thur 7:00 AM",Image: "ecomerceLogo"),
-    PostInfor(title: "Post", description: "Product testing", authorName: "Doch", date: "Thur 7:00 AM",Image: "ecomerceLogo"),
-    PostInfor(title: "Post", description: "Product testing", authorName: "Doch", date: "Thur 7:00 AM",Image: "ecomerceLogo"),
-    PostInfor(title: "Post", description: "Product testing", authorName: "Doch", date: "Thur 7:00 AM",Image: "ecomerceLogo")
-    ]
-    
+    @State var apiresponse : Article?
     @State var title = ""
     @State var isNavigationDetail = false
     var body: some View {
@@ -29,27 +22,28 @@ struct HomeView: View {
                     }
                 }.listRowBackground(Color(hue: 1.0, saturation: 0.0, brightness: 0.899))
 
-                ForEach(data){ res in
+                ForEach(apiresponse?.payload ?? []){ res in
                     Button(action:{
                         isNavigationDetail = true
                     }){
                         HStack{
-                            Image(res.Image ?? "")
+                            KFImage(URL(string: res.imageURL ?? ""))
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 100)
                             VStack(alignment: .leading){
-                                Text(res.title ?? "")
+                                Text("\(res.title ?? "")")
                                     .font(.title2)
                                     .fontWeight(.bold)
                                     .foregroundColor(Color.black)
-                                Text(res.description ?? "")
+                                Text("\(res.content ?? "")")
                                     .foregroundColor(Color.gray)
+                                    .lineLimit(/*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
                                 HStack{
                                     Group{
-                                        Text(res.authorName ?? "")
+                                        Text("\(res.author ?? "")")
                                         Spacer()
-                                        Text(res.date ?? "")
+                                        Text("\(res.publishedDate ?? "")")
                                     }
                                     .foregroundColor(Color.gray)
                                 }
@@ -66,6 +60,15 @@ struct HomeView: View {
                 }
             }
             .navigationTitle("Article")
+        }
+        .onAppear{
+            GetAllPost { article in
+                if let article = article {
+                    apiresponse.self = article
+                }else{
+                    print("Failed to fetch data")
+                }
+            }
         }
     }
 }
