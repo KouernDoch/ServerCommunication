@@ -15,6 +15,9 @@
 		5129CA5D2C957BD800C1763C /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 5129CA5C2C957BD800C1763C /* AlamofireDynamic */; };
 		51A87C052C96DB3500B9CD29 /* FirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A87C042C96DB3500B9CD29 /* FirstView.swift */; };
 		51A87C072C96DC2100B9CD29 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A87C062C96DC2100B9CD29 /* HomeView.swift */; };
+		51EDA9F72C98345900532235 /* postInfor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EDA9F62C98345900532235 /* postInfor.swift */; };
+		51EDA9F92C98397200532235 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EDA9F82C98397200532235 /* PostView.swift */; };
+		51EDA9FB2C98420F00532235 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EDA9FA2C98420F00532235 /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +28,10 @@
 		5129CA522C957B2100C1763C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		51A87C042C96DB3500B9CD29 /* FirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstView.swift; sourceTree = "<group>"; };
 		51A87C062C96DC2100B9CD29 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		51EDA9F22C97BBDA00532235 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		51EDA9F62C98345900532235 /* postInfor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = postInfor.swift; sourceTree = "<group>"; };
+		51EDA9F82C98397200532235 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
+		51EDA9FA2C98420F00532235 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,12 +66,16 @@
 		5129CA4A2C957B1E00C1763C /* ServerCommunication */ = {
 			isa = PBXGroup;
 			children = (
+				51EDA9F32C98342000532235 /* Model */,
+				51EDA9F22C97BBDA00532235 /* Info.plist */,
 				5129CA4B2C957B1E00C1763C /* ServerCommunicationApp.swift */,
 				5129CA4D2C957B1E00C1763C /* ContentView.swift */,
 				5129CA4F2C957B2100C1763C /* Assets.xcassets */,
 				5129CA512C957B2100C1763C /* Preview Content */,
 				51A87C042C96DB3500B9CD29 /* FirstView.swift */,
 				51A87C062C96DC2100B9CD29 /* HomeView.swift */,
+				51EDA9F82C98397200532235 /* PostView.swift */,
+				51EDA9FA2C98420F00532235 /* ProfileView.swift */,
 			);
 			path = ServerCommunication;
 			sourceTree = "<group>";
@@ -75,6 +86,14 @@
 				5129CA522C957B2100C1763C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		51EDA9F32C98342000532235 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				51EDA9F62C98345900532235 /* postInfor.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,6 +177,9 @@
 				51A87C072C96DC2100B9CD29 /* HomeView.swift in Sources */,
 				51A87C052C96DB3500B9CD29 /* FirstView.swift in Sources */,
 				5129CA4C2C957B1E00C1763C /* ServerCommunicationApp.swift in Sources */,
+				51EDA9F92C98397200532235 /* PostView.swift in Sources */,
+				51EDA9FB2C98420F00532235 /* ProfileView.swift in Sources */,
+				51EDA9F72C98345900532235 /* postInfor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +316,7 @@
 				DEVELOPMENT_TEAM = WWH2BXD4W3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ServerCommunication/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -323,6 +346,7 @@
 				DEVELOPMENT_TEAM = WWH2BXD4W3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ServerCommunication/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

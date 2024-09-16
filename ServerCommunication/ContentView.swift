@@ -15,14 +15,34 @@ class MyResponseModel: Decodable,ObservableObject {
     let firstName: String?
     let lastName: String?
 }
-
-struct ContentView: View {
+struct apiResponse : Decodable {
+    var imageName : String
+    var type : String
+    var size : Int
     
+}
+struct ContentView: View {
+    @State private var profileImage: Data?
     @State var aurthor : [MyResponseModel] = []
     @State private var isLoading = false
     
     var body: some View {
         VStack {
+            
+            if let profileImage = profileImage, let uiImage = UIImage(data: profileImage) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+            } else {
+                Text("Loading Image...")
+                    .onAppear {
+                        fetchImage()
+                        let image = UIImage(named: "ecomerceLogo")
+                        uploadfile(image:(image?.jpegData(compressionQuality: 1.0))!) // Call the uploadFile function when the view appears
+                    }
+            }
+            
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
@@ -34,13 +54,12 @@ struct ContentView: View {
                 Text("No data yet.")
             }
             Button("Getdata"){
-                Task{
-                    await getdata()
-                }
-//                print("data")
-//                getdata1()
-
-                
+//                Task{
+//                    await getdata()
+//                }
+                fetchImage()
+                    let image = UIImage(named: "ecomerceLogo")
+                    uploadfile(image:(image?.jpegData(compressionQuality: 1.0))!)
             }
         }
         .padding()
@@ -139,7 +158,44 @@ struct ContentView: View {
         isLoading = false
         
     }
+    
+    
+    func uploadfile(image : Data){
+        let header:  HTTPHeaders = ["content-Type": "multipart/form-data"]
+        
+        AF.upload(multipartFormData: {
+            multipartFormData in multipartFormData.append(image, withName: "file",fileName: ".png",mimeType: "image/*")
+            
+            
+        }, to: "http://110.74.194.123:8080/api/v1/images/upload",method: .post,headers: header).responseJSON{response in
+            switch response.result {
+            case .success(_) :
+                print("Data \(response.data!)")
+                let res = try? JSONDecoder().decode(apiResponse.self, from: response.data!)
+                print("This is imageName: \(res?.imageName ?? "")")
+                print("This is Type: \(res?.type ?? "")")
+                print("This is size: \(res?.size ?? 0)")
+            case .failure(_):
+                print("fail")
+            }
+        }
+        
+    }
+    
+    func fetchImage () {
+        let url = URL(string: "http://110.74.194.123:8080/api/v1/images?fileName=b14b25fb-dc27-4eed-a60a-d9ed8471847b.png")!
+        URLSession.shared.dataTask(with: url){
+            data,_,error in
+            print(data)
+            DispatchQueue.main.async {
+                self.profileImage =  data
+            }
+            
+        }.resume()
+    }
+    
 }
+
 
 #Preview {
     ContentView()
